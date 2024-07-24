@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { useToasts, ToastProvider } from 'react-toast-notifications';
-import "../styles/globals.css"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../styles/globals.css";
 
 const CustomerForm = () => {
   const { addToast } = useToasts();
@@ -53,7 +53,7 @@ console.log(customerData,'kugytfdrfd');
     
         const response = await axios.post('/api/Customer', customerData);
         console.log(response.data,'kgjhfcxd');
-        addToast('Customer created successfully', { appearance: 'success' });
+        toast.success('Customer created successfully', { appearance: 'success' });
         setCustomers([...customers, response.data]);
  
 
@@ -101,12 +101,12 @@ console.log(customerData,'kugytfdrfd');
       setCustomers(customers.map(cust => (cust._id === _id ? response.data : cust)));
       console.log(response.data);
 
-      addToast('Customer updated successfully', { appearance: 'success' });
+      toast.success('Customer updated successfully', { appearance: 'success' });
 
       clearForm();
     } catch (error) {
       console.error('Error updating customer:', error);
-      addToast('Failed to update customer', { appearance: 'error' });
+      toast.success('Failed to update customer', { appearance: 'error' });
     }
   };
   
@@ -236,6 +236,7 @@ console.log(customerData,'kugytfdrfd');
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
